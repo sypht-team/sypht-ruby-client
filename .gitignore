@@ -1,4 +1,4 @@
-# Custom adaptation of https://www.gitignore.io/api/git,ruby,linux,macos,windows,rubymine+all
+# Custom adaptation of https://www.gitignore.io/api/git,ruby,linux,macos,windows,rubymine
 
 # Ruby
 *.rbc
@@ -11,11 +11,29 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
-/.bundle/
-/.yardoc
+
+## Documentation cache and generated files:
+/.yardoc/
 /_yardoc/
 /doc/
+/rdoc/
+
+## Environment normalization:
+/.bundle/
+/vendor/bundle
+/lib/bundler/man/
+
+# for a library or gem, you might want to ignore these files since the code is
+# intended to run in multiple environments; otherwise, check them in:
 Gemfile.lock
+.ruby-version
+.ruby-gemset
+
+# Used by dotenv library to load environment variables.
+.env
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.rvmrc
 
 # ignore Jetbrains/RubyMine Configurations
 .idea/
@@ -46,11 +64,6 @@ Gemfile.lock
 # Thumbnails
 ._*
 
-# Used by dotenv library to load environment variables.
-.env
-
-# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
-.rvmrc
 
 ### Windows ###
 # Windows thumbnail cache files

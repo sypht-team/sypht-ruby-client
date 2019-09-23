@@ -1,10 +1,10 @@
-require "bundler/gem_tasks"
-require "rake/testtask"
+require 'rspec/core/rake_task'
+require 'bundler/gem_tasks'
 
-Rake::TestTask.new(:test) do |t|
-  t.libs << "test"
-  t.libs << "lib"
-  t.test_files = FileList["test/**/*_test.rb"]
+# Default directory to look in is `/specs`
+# Run with `rake spec`
+RSpec::Core::RakeTask.new(:spec) do |task|
+  task.rspec_opts = ['--color']
 end
 
-task :default => :test
+task :default => :spec
