@@ -1,3 +1,57 @@
 #!/usr/bin/env ruby
-
 require "sypht"
+
+USAGE = <<ENDUSAGE
+Usage:
+   sypht [-h] [-v] extract --fieldset sypht.document --fieldset sypht.invoice path/to/your/document.pdf
+ENDUSAGE
+
+HELP = <<ENDHELP
+   -h, --help       Show this help.
+   -v, --version    Show the version number (#{Sypht::VERSION}).
+   extract          Extract fields from a given file for the specified fieldsets
+ENDHELP
+
+# Setting default values
+ARGS = { extract: false, fieldset: [] }
+next_arg = false
+file_path = ""
+
+ARGV.each do |arg|
+  case arg
+  when '-h','--help'      then ARGS[:help]      = true
+  when 'extract'          then ARGS[:extract]    = true
+  when '-v','--version'   then ARGS[:version]   = true
+  when '--fieldset'       then next_arg = :fieldset
+  else
+    if next_arg
+      ARGS[:fieldset].append(arg)
+      next_arg = false
+    else
+      file_path = arg
+    end
+  end
+end
+
+puts "Sypht v#{Sypht::VERSION}" if ARGS[:version]
+
+if ARGS[:help] or !ARGS[:extract]
+  puts USAGE unless ARGS[:version]
+  puts HELP if ARGS[:help]
+  exit
+end
+
+if file_path.empty?
+  raise ArgumentError "Please provide valid file path"
+end
+
+field_sets = ARGS[:fieldset]
+if field_sets.empty?
+  raise ArgumentError "Please provide valid fieldsets"
+end
+
+client_id, client_secret = ENV['SYPHT_API_KEY'].split(":")
+@client = Sypht::Client.new(client_id, client_secret)
+fid = @client.upload(file_path, field_sets)
+results = @client.fetch_results fid
+puts JSON.pretty_generate results
