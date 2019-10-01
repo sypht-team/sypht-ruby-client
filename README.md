@@ -47,7 +47,7 @@ results = @client.fetch_results fid
 or run it in the command line:
 
 ```
-$ sypht extract --fieldset sypht.document --fieldset sypht.bank path/to/your/document.pdf
+$ sypht extract --fieldset sypht.document --fieldset sypht.invoice path/to/your/document.pdf
 ```
 
 ## Development
