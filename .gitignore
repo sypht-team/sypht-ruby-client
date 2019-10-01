@@ -27,6 +27,7 @@
 # intended to run in multiple environments; otherwise, check them in:
 Gemfile.lock
 .ruby-version
+4
 .ruby-gemset
 
 # Used by dotenv library to load environment variables.

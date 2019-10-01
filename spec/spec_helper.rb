@@ -1,4 +1,4 @@
-require "sypht/client"
+require "sypht"
 require "coveralls"
 
 Coveralls.wear!
@@ -15,6 +15,12 @@ def upload_invoice(filesets)
 end
 
 def check_keys(keys, result)
+  keys.each do  |k|
+    expect(result.key? k)
+  end
+end
+
+def check_no_keys(keys, result)
   keys.each do  |k|
     expect(result.key? k)
   end

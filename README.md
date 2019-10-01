@@ -15,7 +15,7 @@ for an [account](https://www.sypht.com/signup/developer)
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'sypht-ruby-client'
+gem 'sypht'
 ```
 
 And then execute:
@@ -24,12 +24,24 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install sypht-ruby-client
+    $ gem install sypht
         
 ## Usage
 
 ```ruby
+require 'sypht'
 
+# API_KEY is stored as env variable in the format client_id:client_secret
+client_id, client_secret = ENV['SYPHT_API_KEY'].split(":")
+
+# Create new Sypht Client
+@client = Sypht::Client.new(client_id, client_secret)
+
+# Submit a file for upload, along with a list of fieldsets
+fid = @client.upload("samples/sample_invoice.pdf", ['sypht.invoice'])
+
+# get results of the file based on fid
+results = @client.fetch_results fid
 ```
 
 or run it in the command line:
@@ -40,7 +52,12 @@ $ sypht extract --fieldset sypht.document --fieldset sypht.bank path/to/your/doc
 
 ## Development
 
+You need to install Ruby (2.5+), which can be installed using [RVM](https://rvm.io/rvm/install)
+
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To build and test the gem locally, run `rake install`, which will package the gem to "pkg/sypht-<version>.gem", and install it in the current ruby. 
+You can then run `irb` and use the gem as mentioned in the usage section.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
