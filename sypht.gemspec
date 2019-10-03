@@ -6,13 +6,13 @@ require "sypht/version"
 Gem::Specification.new do |spec|
   spec.name          = "sypht"
   spec.version       = Sypht::VERSION
-  spec.authors       = ["Ankur Singh"]
-  spec.email         = ["ankur13019@iiitd.ac.in"]
+  spec.authors       = ["Ankur Singh", "Simon Mittag"]
+  spec.email         = ["ankur13019@iiitd.ac.in", "simon@sypht.com"]
 
   spec.summary       = "Ruby reference sypht implementation for working with the Sypht API"
   spec.description   = "Sypht(https://sypht.com) is a SaaS API((https://docs.sypht.com/) which extracts key fields from documents. For example, you can upload an image or pdf of a bill or invoice and extract the amount due, due date, invoice number and biller information."
   spec.homepage      = "https://github.com/sypht-team/sypht-ruby-sypht"
-  spec.license       = "MIT"
+  spec.license       = "Apache"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
