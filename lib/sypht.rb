@@ -29,7 +29,7 @@ module Sypht
       @access_token = authenticate
     end
 
-    def upload(file, fieldsets, tags=nil, endpoint=nil, workflow=nil, options=nil)
+    def upload(file, fieldSets, tags=nil, endpoint=nil, workflow=nil, options=nil)
       headers = {
           "Authorization": "Bearer " + @access_token,
           multipart: true
@@ -37,7 +37,7 @@ module Sypht
       endpoint ||= API_BASE_ENDPOINT + "/fileupload"
 
       data = {
-        fieldsets: parse_fieldsets(fieldsets),
+        fieldSets: parse_fieldSets(fieldSets),
         'fileToUpload': File.new(file, 'rb')
       }
       if tags
@@ -51,6 +51,7 @@ module Sypht
       end
 
       result = JSON.parse(RestClient.post(endpoint, data, headers))
+      print("fileId: " + result['fileId'])
 
       unless result.key?('fileId')
         raise Exception('Upload failed with response: ' + JSON.dump(result))
@@ -88,18 +89,19 @@ module Sypht
       end
     end
 
-    def parse_fieldsets(fieldsets)
+    def parse_fieldSets(fieldSets)
       out = []
-      fieldsets.each do |fs|
+      fieldSets.each do |fs|
         if FIELDSET.key? fs
-          out.append(FIELDSET[fs])
+          out.append('"' + FIELDSET[fs] + '"')
         elsif FIELDSET.has_value? fs
-          out.append(fs)
+          out.append('"' + fs + '"')
         else
           raise ArgumentError, "Undefined fileset"
         end
       end
       out
+      return "[" + out.join(",") + "]"
     end
   end
 end
