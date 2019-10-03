@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/sypht-team/sypht-ruby-client.svg?branch=master)](https://travis-ci.com/sypht-team/sypht-ruby-client.svg?branch=master))
+[![Build Status](https://travis-ci.com/sypht-team/sypht-ruby-client.svg?branch=master)](https://travis-ci.com/sypht-team/sypht-ruby-client.svg?branch=master)
 
 # Sypht Ruby Client
 This repository is a Ruby reference client implementation for working with the Sypht API at https://api.sypht.com.
